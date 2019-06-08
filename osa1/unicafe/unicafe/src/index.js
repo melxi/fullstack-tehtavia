@@ -3,32 +3,29 @@ import ReactDOM from "react-dom";
 
 const Statisctic = props => {
   return (
-    <p>
-      {props.text} {props.value}
-    </p>
+    <tbody>
+      <tr>
+        <td>{props.text}</td>
+        <td>{props.value}</td>
+      </tr>
+    </tbody>
   );
 };
 
 const Statisctics = props => {
   if (props.all > 0) {
     return (
-      <>
-        <h1>statistics</h1>
+      <table>
         <Statisctic text="good" value={props.good} />
         <Statisctic text="neutral" value={props.neutral} />
         <Statisctic text="bad" value={props.bad} />
         <Statisctic text="all" value={props.all} />
         <Statisctic text="average" value={props.average} />
-        <Statisctic text="positive" value={props.positive} />
-      </>
+        <Statisctic text="positive" value={`${props.positive} %`} />
+      </table>
     );
   }
-  return (
-    <>
-      <h1>statistics</h1>
-      <p>No feedback given</p>
-    </>
-  );
+  return <p>No feedback given</p>;
 };
 
 const Button = props => {
@@ -65,6 +62,7 @@ const App = () => {
           setBad(bad + 1);
         }}
       />
+      <h1>statistics</h1>
       <Statisctics
         good={good}
         neutral={neutral}
