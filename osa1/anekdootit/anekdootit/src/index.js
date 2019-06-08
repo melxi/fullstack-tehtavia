@@ -6,6 +6,8 @@ const App = props => {
   const [points, setPoints] = useState(
     Array.apply(null, { length: props.anecdotes.length }).map(() => 0)
   );
+  const highestVote = Math.max(...points);
+  const highestIndex = points.indexOf(highestVote);
 
   const handleNext = () => {
     const randomIndex = Math.floor(Math.random() * props.anecdotes.length);
@@ -21,6 +23,7 @@ const App = props => {
   return (
     <>
       <div>
+        <h1>Anecdote of the day</h1>
         {props.anecdotes[selected]}
         <br />
         {`has ${points[selected]} votes`}
@@ -39,6 +42,12 @@ const App = props => {
       >
         next anecdote
       </button>
+      <div>
+        <h1>Anecdote with most votes</h1>
+        {props.anecdotes[highestIndex]}
+        <br />
+        {`has ${points[highestIndex]} votes`}
+      </div>
     </>
   );
 };
