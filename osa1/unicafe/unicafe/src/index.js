@@ -2,15 +2,23 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 const Statisctics = props => {
+  if (props.all > 0) {
+    return (
+      <>
+        <h1>statistics</h1>
+        <p>good {props.good}</p>
+        <p>neutral {props.neutral}</p>
+        <p>bad {props.bad}</p>
+        <p>all {props.all}</p>
+        <p>average {props.average || 0}</p>
+        <p>positive {props.positive || 0} %</p>
+      </>
+    );
+  }
   return (
     <>
       <h1>statistics</h1>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {props.all}</p>
-      <p>average {props.average || 0}</p>
-      <p>positive {props.positive || 0} %</p>
+      <p>No feedback given</p>
     </>
   );
 };
