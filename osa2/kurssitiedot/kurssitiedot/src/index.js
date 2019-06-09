@@ -24,14 +24,13 @@ const Content = ({ course }) => {
 };
 
 const Total = ({ course }) => {
-  const result = course.parts.reduce((total, exercises) => {
+  const total = course.parts.reduce((total, exercises) => {
     return total + exercises.exercises;
   }, 0);
-  console.log(result);
 
   return (
     <p>
-      <strong>total of {result} exercices</strong>
+      <strong>total of {total} exercices</strong>
     </p>
   );
 };
