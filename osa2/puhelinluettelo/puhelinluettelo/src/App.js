@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
   const [newName, setNewName] = useState("");
+  console.log(persons);
 
   const handleChange = event => {
     setNewName(event.target.value);
@@ -10,7 +11,16 @@ const App = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    setPersons(persons.concat({ name: newName }));
+
+    persons.forEach(person => {
+      if (person.name === newName) {
+        alert(`${person.name} is already added to phonebook`);
+        setPersons(persons.splice(0, persons.length));
+      } else {
+        setPersons(persons.concat({ name: newName }));
+      }
+    });
+
     setNewName("");
   };
 
