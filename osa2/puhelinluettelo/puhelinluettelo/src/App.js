@@ -29,22 +29,17 @@ const App = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
+    setPersons(persons.concat({ name: newName, number: newNumber }));
     persons.forEach(person => {
       if (person.name === newName) {
         alert(`${person.name} is already added to phonebook`);
         setPersons(persons.splice(0, persons.length));
-      } else {
-        setPersons(persons.concat({ name: newName, number: newNumber }));
       }
     });
 
     setNewName("");
     setNewNumber("");
   };
-
-  const filteredNames = persons.filter(
-    person => person.name.toLowerCase().indexOf(searchName.toLowerCase()) >= 0
-  );
 
   return (
     <div>
@@ -59,7 +54,7 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
       <h3>Numbers</h3>
-      <Persons filteredNames={filteredNames} />
+      <Persons persons={persons} searchName={searchName} />
     </div>
   );
 };

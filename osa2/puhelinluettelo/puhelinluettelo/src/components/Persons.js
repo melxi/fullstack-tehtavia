@@ -1,6 +1,10 @@
 import React from "react";
 
-const Persons = ({ filteredNames }) => {
+const Persons = ({ persons, searchName }) => {
+  const filteredNames = persons.filter(
+    person => person.name.toLowerCase().indexOf(searchName.toLowerCase()) >= 0
+  );
+
   return (
     <div>
       <div>
