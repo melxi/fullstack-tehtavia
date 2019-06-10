@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: "040-123456" },
-    { name: "Ada Lovelace", number: "39-44-5323523" },
-    { name: "Dan Abramov", number: "12-43-234345" },
-    { name: "Mary Poppendieck", number: "39-23-6423122" }
-  ]);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [searchName, setSearchName] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/persons").then(response => {
+      setPersons(response.data);
+    });
+  }, []);
 
   const handleNameChange = event => {
     setNewName(event.target.value);
@@ -29,13 +31,14 @@ const App = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    setPersons(persons.concat({ name: newName, number: newNumber }));
-    persons.forEach(person => {
-      if (person.name === newName) {
-        alert(`${person.name} is already added to phonebook`);
-        setPersons(persons.splice(0, persons.length));
-      }
-    });
+    axios
+      .post("http://localhost:3001/persons", {
+        name: newName,
+        number: newNumber
+      })
+      .then(response => {
+        setPersons(persons.concat(response.data));
+      });
 
     setNewName("");
     setNewNumber("");
