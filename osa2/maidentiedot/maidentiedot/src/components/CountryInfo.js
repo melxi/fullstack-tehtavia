@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const CountryInfo = ({ country }) => {
+const CountryInfo = ({ country, getWeather }) => {
+  useEffect(() => {
+    getWeather(country.name);
+  });
+
   return (
     <>
       <h1>{country.name}</h1>
