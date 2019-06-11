@@ -1,6 +1,6 @@
 import React from "react";
 
-const Persons = ({ persons, searchName }) => {
+const Persons = ({ persons, searchName, handleDelete }) => {
   const filteredNames = persons.filter(
     person => person.name.toLowerCase().indexOf(searchName.toLowerCase()) >= 0
   );
@@ -11,6 +11,13 @@ const Persons = ({ persons, searchName }) => {
         {filteredNames.map(person => (
           <p key={person.id}>
             {person.name} {person.number}
+            <button
+              onClick={() => {
+                handleDelete(person.id);
+              }}
+            >
+              delete
+            </button>
           </p>
         ))}
       </div>
