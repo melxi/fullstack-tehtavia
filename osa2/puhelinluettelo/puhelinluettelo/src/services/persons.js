@@ -17,7 +17,6 @@ const remove = id => {
 };
 
 const replace = (id, newPerson) => {
-  console.log(newPerson);
   const request = axios.put(`${baseUrl}/${id}`, newPerson);
   return request.then(response => response.data);
 };

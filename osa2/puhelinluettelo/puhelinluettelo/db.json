@@ -26,9 +26,14 @@
       "id": 5
     },
     {
-      "name": "a",
-      "number": "3",
+      "name": "Juha Tauriainen",
+      "number": "041-2345678",
       "id": 6
+    },
+    {
+      "name": "New Name",
+      "number": "1",
+      "id": 7
     }
   ]
 }
