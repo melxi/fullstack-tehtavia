@@ -28,15 +28,44 @@ const App = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    personService
-      .add({ name: newName, number: newNumber })
-      .then(newPerson => setPersons(persons.concat(newPerson)));
+
+    const dublicate = persons.filter(person => person.name === newName);
+
+    if (dublicate.length === 1) {
+      persons.forEach(person => {
+        if (person.name === newName) {
+          const newId = person.id;
+          const replace = window.confirm(
+            `${
+              person.name
+            } is already added to phonebook, replace the old number with a nwe one?`
+          );
+
+          if (replace) {
+            personService
+              .replace(newId, { ...person, number: newNumber })
+              .then(newPerson =>
+                setPersons(
+                  persons.map(person => {
+                    return person.id !== newId ? person : newPerson;
+                  })
+                )
+              );
+          }
+        }
+      });
+    } else {
+      personService
+        .add({ name: newName, number: newNumber })
+        .then(newPerson => setPersons(persons.concat(newPerson)));
+    }
+
     setNewName("");
     setNewNumber("");
   };
 
   const handleDelete = id => {
-    const confirmRemoval = window.confirm(`Delete ${persons[id - 1].name}?`);
+    const confirmRemoval = window.confirm(`Delete ?`);
 
     if (confirmRemoval) {
       personService

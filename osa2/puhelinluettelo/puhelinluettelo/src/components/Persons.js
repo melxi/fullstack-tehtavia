@@ -8,8 +8,8 @@ const Persons = ({ persons, searchName, handleDelete }) => {
   return (
     <div>
       <div>
-        {filteredNames.map(person => (
-          <p key={person.id}>
+        {filteredNames.map((person, index) => (
+          <p key={index}>
             {person.name} {person.number}
             <button
               onClick={() => {

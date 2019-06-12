@@ -16,4 +16,10 @@ const remove = id => {
   return request;
 };
 
-export default { getAll, add, remove };
+const replace = (id, newPerson) => {
+  console.log(newPerson);
+  const request = axios.put(`${baseUrl}/${id}`, newPerson);
+  return request.then(response => response.data);
+};
+
+export default { getAll, add, remove, replace };
