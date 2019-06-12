@@ -56,6 +56,18 @@ const App = () => {
                 setTimeout(() => {
                   setErrorMessage(null);
                 }, 3000);
+              })
+              .catch(error => {
+                setErrorMessage({
+                  message: `Information of ${
+                    persons[newId - 1].name
+                  } has already been removed from server`,
+                  success: false
+                });
+                setTimeout(() => {
+                  setErrorMessage(null);
+                  setPersons(persons.filter(person => person.id !== newId));
+                }, 3000);
               });
           }
         }
@@ -82,7 +94,10 @@ const App = () => {
     if (confirmRemoval) {
       personService.remove(id).then(() => {
         setPersons(persons.filter(person => person.id !== id));
-        setErrorMessage(`Deleted ${persons[id - 1].name}`);
+        setErrorMessage({
+          message: `Deleted ${persons[id - 1].name}`,
+          success: true
+        });
         setTimeout(() => {
           setErrorMessage(null);
         }, 3000);
